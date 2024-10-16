@@ -1,5 +1,6 @@
  package com.example.trabalho2;
 
+ import android.content.Intent;
  import android.os.Bundle;
  import android.view.View;
  import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@
      private ActivityMainBinding binding;
      private List<Participante> listParticipante;
      private AppDatabase db;
+     private Intent intent;
 
      private Participante participante = new Participante();
 
@@ -31,11 +33,12 @@
         binding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                participante.setCPF("07777558774");
-                participante.setNome("Teste");
-                participante.setTelefone("67999999999");
-
-                db.participanteDao().insert(participante);
+                adicionaParticipante();
+//                participante.setCPF("07777558774");
+//                participante.setNome("Teste");
+//                participante.setTelefone("67999999999");
+//
+//                db.participanteDao().insert(participante);
             }
         });
     }
@@ -45,12 +48,16 @@
          super.onResume();
          buscarParticipantes();
      }
+     public void adicionaParticipante() {
+         intent=new Intent(this, ParticipanteActivity.class);
+         startActivity(intent);
+     }
 
      private void buscarParticipantes(){
         listParticipante = db.participanteDao().getAll();
         ArrayAdapter<Participante> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, listParticipante);
          binding.listViewUsuarios.setAdapter(adapter);
-
      }
+
 }
