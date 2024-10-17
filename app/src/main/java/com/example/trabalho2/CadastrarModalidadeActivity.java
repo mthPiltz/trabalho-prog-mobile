@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.trabalho2.Entities.Modalidade;
+import com.example.trabalho2.Entities.Participante;
 import com.example.trabalho2.database.AppDatabase;
 import com.example.trabalho2.databinding.ActivityCadastrarModalidadeBinding;
-import com.example.trabalho2.databinding.ActivityCadastrarParticipanteBinding;
 
 public class CadastrarModalidadeActivity extends AppCompatActivity {
     private ActivityCadastrarModalidadeBinding binding;
@@ -28,14 +28,75 @@ public class CadastrarModalidadeActivity extends AppCompatActivity {
                 salvarModalidade();
             }
         });
+
+        binding.btnDellModalidde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                excluir();
+            }
+        });
+
+        binding.btnEditMod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editar();
+            }
+        });
     }
 
     private void salvarModalidade(){
+        String desc = binding.txtDesc.getText().toString();
+        if(desc.isEmpty()){
+            Toast.makeText(this, "Preencha a descrição",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Modalidade modalidade = new Modalidade();
-        modalidade.setDescricao(binding.txtDesc.getText().toString());
+        modalidade.setDescricao(desc);
+
 
         db.modalidadeDao().insert(modalidade);
         Toast.makeText(this, "Modalidade Inserida",
                 Toast.LENGTH_LONG).show();
+    }
+
+    private void excluir(){
+        int idExcluido = Integer.parseInt(binding.delidMod.getText().toString());
+        if(idExcluido == 0){
+            Toast.makeText(this, "Preencha o id excluido.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Modalidade modalidade = db.modalidadeDao().getById(idExcluido);
+        if(modalidade != null){
+           db.modalidadeDao().delete(modalidade);
+           Toast.makeText(this, "Modalidade excluída com sucesso", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void editar(){
+        int idEditar = Integer.parseInt(binding.txtId.getText().toString());
+        if(idEditar == 0){
+            Toast.makeText(this, "Preencha o id para editar.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String desc = binding.txtDesc.getText().toString();
+        if(desc.isEmpty()){
+            Toast.makeText(this, "Preencha a descrição",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Modalidade modalidade = db.modalidadeDao().getById(idEditar);
+        if (modalidade != null){
+            modalidade.setDescricao(desc);
+            db.modalidadeDao().update(modalidade);
+            Toast.makeText(this, "Modalidade atualizada",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

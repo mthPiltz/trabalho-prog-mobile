@@ -29,4 +29,9 @@ public class Participante {
 
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
+    @Override
+    public String toString() {
+        return "Id: " + id + "; Nome: " + nome + "; CPF: " + CPF + "; Telefone: " + telefone + "; idModalidade: 1";
+    }
+
 }
