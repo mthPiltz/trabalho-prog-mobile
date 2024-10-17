@@ -45,6 +45,13 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
             }
         });
 
+        binding.btnEditPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editar();
+            }
+        });
+
         buscarModalidades();
     }
 
@@ -52,6 +59,24 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
         String nome = binding.txtNome.getText().toString();
         String fone = binding.textTelefone.getText().toString();
         String cpf = binding.txtCpf.getText().toString();
+
+        if(nome.isEmpty()){
+            Toast.makeText(this, "Preencha o nome",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(fone.isEmpty()){
+            Toast.makeText(this, "Preencha o telefone",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(cpf.isEmpty()){
+            Toast.makeText(this, "Preencha o cpf",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
 
         Participante participante = new Participante();
         participante.setNome(nome);
@@ -96,6 +121,42 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
         if(participante != null){
             db.participanteDao().delete(participante);
             Toast.makeText(this, "Participante excluída com sucesso", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void editar(){
+        int editId = Integer.parseInt(binding.editidPart.getText().toString());
+        String nome = binding.txtNome.getText().toString();
+        String fone = binding.textTelefone.getText().toString();
+        String cpf = binding.txtCpf.getText().toString();
+
+        if(nome.isEmpty()){
+            Toast.makeText(this, "Preencha o nome",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(fone.isEmpty()){
+            Toast.makeText(this, "Preencha o telefone",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(cpf.isEmpty()){
+            Toast.makeText(this, "Preencha o cpf",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Participante participante = db.participanteDao().getById(editId);
+        if(participante != null){
+            participante.setCPF(cpf);
+            participante.setNome(nome);
+            participante.setTelefone(fone);
+
+            db.participanteDao().update(participante);
+            Toast.makeText(this, "Usuário atualizado",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }

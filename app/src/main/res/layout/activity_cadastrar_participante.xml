@@ -14,10 +14,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="469dp"
         android:hint="Nome"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/delidPart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,26 +86,55 @@
 
     <EditText
         android:id="@+id/delidPart"
-        android:layout_width="0dp"
+        android:layout_width="102dp"
         android:layout_height="0dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="587dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="103dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="Excluir id"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editidPart"
         app:layout_constraintEnd_toStartOf="@+id/btnDellPart"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNome" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnDellPart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="163dp"
+        android:layout_marginBottom="22dp"
         android:text="Excluir"
-        app:layout_constraintBaseline_toBaselineOf="@+id/delidPart"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditPart"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editidPart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="Editar id"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditPart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delidPart" />
+
+    <Button
+        android:id="@+id/btnEditPart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="31dp"
+        android:text="Atualizar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/delidPart" />
+        app:layout_constraintStart_toEndOf="@+id/editidPart" />
 </androidx.constraintlayout.widget.ConstraintLayout>
