@@ -15,12 +15,8 @@
 
  public class MainActivity extends AppCompatActivity {
      private ActivityMainBinding binding;
-     private List<Participante> listParticipante;
      private AppDatabase db;
      private Intent intent;
-
-     private Participante participante = new Participante();
-
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +26,17 @@
 
         db=AppDatabase.getDatabase(getApplicationContext());
 
-        binding.btn.setOnClickListener(new View.OnClickListener() {
+        binding.btnParticipante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adicionaParticipante();
-//                participante.setCPF("07777558774");
-//                participante.setNome("Teste");
-//                participante.setTelefone("67999999999");
-//
-//                db.participanteDao().insert(participante);
+            }
+        });
+
+        binding.btnModalidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adicionaModalidade();
             }
         });
     }
@@ -46,18 +44,15 @@
      @Override
      protected void onResume(){
          super.onResume();
-         buscarParticipantes();
      }
      public void adicionaParticipante() {
          intent=new Intent(this, ParticipanteActivity.class);
          startActivity(intent);
      }
 
-     private void buscarParticipantes(){
-        listParticipante = db.participanteDao().getAll();
-        ArrayAdapter<Participante> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, listParticipante);
-         binding.listViewUsuarios.setAdapter(adapter);
+     public  void adicionaModalidade(){
+         intent = new Intent(this, ModalidadeActivity.class);
+         startActivity(intent);
      }
 
 }

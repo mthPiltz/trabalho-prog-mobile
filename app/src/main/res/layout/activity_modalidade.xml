@@ -2,36 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ParticipanteActivity">
+    tools:context=".ModalidadeActivity">
 
     <TextView
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Participantes"
+        android:text="Modalidades"
         android:textSize="55dp" />
 
     <ListView
-        android:id="@+id/listViewParticipante"
+        android:id="@+id/listViewModalidade"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/txt" />
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="52dp"
         android:text="Adicionar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewParticipante" />
+        app:layout_constraintTop_toBottomOf="@+id/listViewModalidade" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,7 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
         participante.setTelefone(binding.textTelefone.getText().toString());
         participante.setCPF(binding.txtCpf.getText().toString());
 
-        if(dbUsuarioId != 1){
+        if(dbUsuarioId != -1){
             participante = db.participanteDao().getById(dbUsuarioId);
             participante.setId(dbUsuarioId);
             db.participanteDao().update(participante);
