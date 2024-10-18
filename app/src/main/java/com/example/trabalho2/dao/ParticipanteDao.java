@@ -26,4 +26,7 @@ public interface ParticipanteDao {
 
     @Query("SELECT * FROM Participante WHERE id = :id")
     Participante getById(int id);
+
+    @Query("SELECT * FROM Participante P JOIN ParticipanteModalidade PM ON P.id = PM.idParticipante WHERE PM.idModalidade = :idModalidade")
+    List<Participante> getByModalidade(int idModalidade);
 }

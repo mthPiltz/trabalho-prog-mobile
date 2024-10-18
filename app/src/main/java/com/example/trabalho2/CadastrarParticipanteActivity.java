@@ -78,6 +78,11 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
             return;
         }
 
+        if(!verificaCPFValido(cpf)) {
+            Toast.makeText(this, "CPF inválido", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Participante participante = new Participante();
         participante.setNome(nome);
         participante.setTelefone(fone);
@@ -98,8 +103,39 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Selecione uma modalidade antes de salvar o participante", Toast.LENGTH_LONG).show();
         }
+    }
 
+    private boolean verificaCPFValido(String cpf) {
+        cpf = cpf.replaceAll("[^\\d]", "");
 
+        if (cpf.length() != 11) {
+            return false;
+        }
+
+        if (cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+        try {
+            int peso = 10;
+            int soma = 0;
+            for (int i = 0; i < 9; i++) {
+                soma += (cpf.charAt(i) - '0') * peso--;
+            }
+            int digito1 = 11 - (soma % 11);
+            if (digito1 > 9) digito1 = 0;
+
+            peso = 11;
+            soma = 0;
+            for (int i = 0; i < 10; i++) {
+                soma += (cpf.charAt(i) - '0') * peso--;
+            }
+            int digito2 = 11 - (soma % 11);
+            if (digito2 > 9) digito2 = 0;
+
+            return cpf.charAt(9) - '0' == digito1 && cpf.charAt(10) - '0' == digito2;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void buscarModalidades(){

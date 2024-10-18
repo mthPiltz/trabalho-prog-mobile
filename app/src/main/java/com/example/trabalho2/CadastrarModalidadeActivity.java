@@ -11,6 +11,8 @@ import com.example.trabalho2.Entities.Participante;
 import com.example.trabalho2.database.AppDatabase;
 import com.example.trabalho2.databinding.ActivityCadastrarModalidadeBinding;
 
+import java.util.List;
+
 public class CadastrarModalidadeActivity extends AppCompatActivity {
     private ActivityCadastrarModalidadeBinding binding;
     private AppDatabase db;
@@ -68,6 +70,14 @@ public class CadastrarModalidadeActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             return;
         }
+
+        List<Participante> participanteList = db.participanteDao().getByModalidade(idExcluido);
+        if(participanteList.size() > 0){
+            for(int i = 0; i < participanteList.size(); i++){
+                db.participanteDao().delete(participanteList.get(i));
+            }
+        }
+
 
         Modalidade modalidade = db.modalidadeDao().getById(idExcluido);
         if(modalidade != null){
